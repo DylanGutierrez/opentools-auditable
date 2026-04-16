@@ -1,0 +1,32 @@
+Metasploit tip: When in a module, use back to go back to the top level 
+prompt
+[0m[36m[37m
+                 _---------.
+             .' #######   ;."
+  .---,.    ;@             @@`;   .---,..
+." @@@@@'.,'@@            @@@@@',.'@@@@ ".
+'-.@@@@@@@@@@@@@          @@@@@@@@@@@@@ @;
+   `.@@@@@@@@@@@@        @@@@@@@@@@@@@@ .'
+     "--'.@@@  -.@        @ ,'-   .'--"
+          ".@' ; @       @ `.  ;'
+            |@@@@ @@@     @    .
+             ' @@@ @@   @@    ,
+              `.@@@@    @@   .
+                ',@@     @   ;           _____________
+                 (   3 C    )     /|___ / Metasploit! \
+                 ;@'. __*__,."    \|--- \_____________/
+                  '(.,...."/[0m
+[0m
+
+       =[ [33mmetasploit v6.4.84-dev[0m                                ]
++ -- --=[ 2,547 exploits - 1,309 auxiliary - 1,683 payloads     ]
++ -- --=[ 432 post - 49 encoders - 13 nops - 9 evasion          ]
+
+Metasploit Documentation: https://docs.metasploit.com/
+The Metasploit Framework is a Rapid7 Open Source Project
+
+[?1034h[4mmsf[0m [0m> exitploitInterrupt: use the 'exit' command to quit
+[4mmsf[0m [0m> Interrupt: use the 'exit' command to quit
+[4mmsf[0m [0m> Interrupt: use the 'exit' command to quit
+[4mmsf[0m [0m> xInterrupt: use the 'exit' command to quit
+[4mmsf[0m [0m> 
