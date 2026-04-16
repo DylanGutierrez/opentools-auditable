@@ -1,3 +1,9 @@
+# Contenu actuel du github :
+
+- Le code source, backend et frontend.
+- Le pdf du Jalon T2 pour suivre l'avancement du projet.
+- une petite vidéo explicative pour comprendre comment utiliser Auditable .
+
 # Auditable
 
 Nom : Auditable (par OpenTools)
@@ -21,3 +27,14 @@ Dans les versions récentes de Kali Linux :
 # Auditable---Frontend
 
 Le frontend a été conçu en React JS, il vous faudra donc installer node et npm, mais ne vous inquiétez pas, des scripts Shell sont là pour automatiser l'installation (idem pour le backend). Vous devrez simplement les exécuter en tant qu'admin, car il sont necessaires pour l'installation de certains éléments.
+
+# Installation du projet Auditable
+
+Placez-vous dans le répertoire "frontend" du projet Auditable et lancez le script d'installation "shell_frontend_install.sh" avec la commande suivante :
+
+sudo ./shell_frontend_install.sh
+
+Faite de même avec le backend, Placez-vous dans le répertoire "backend" du projet Auditable et lancez le script d'installation "shell_backend_install.sh" avec la commande suivante :
+
+sudo ./shell_backend_install.sh
+
