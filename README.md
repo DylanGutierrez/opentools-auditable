@@ -30,11 +30,11 @@ Le frontend a été conçu en React JS, il vous faudra donc installer node et np
 
 # Installation du projet Auditable
 
-Placez-vous dans le répertoire "opentools-auditable", la racine du projet Auditable et lancez le script d'installation "shell_frontend_install.sh" avec la commande suivante :
+Il est conseillé de lancer votre terminal en tant qu'admin.
 
-sudo ./shell_frontend_install.sh
+Placez-vous dans le répertoire "opentools-auditable", la racine du projet Auditable et lancez le script d'installation "setup_make.sh" (faite un "chmod +x setup_make.sh" si necessaire). Après l'installation de make vous devrez lancer la commande suivante : make install
 
-Faite de même avec le backend, Placez-vous dans le répertoire "backend" du projet Auditable et lancez le script d'installation "shell_backend_install.sh" avec la commande suivante :
+Laissez la commande installer tous le necessaire et attendez qu'Auditable se lance dans votre navigateur.
 
-sudo ./shell_backend_install.sh
+Vous pourrez vous laisser guider par les instructions présentes sur la pages d'acceuil et renseignez vous sur le page courrantes en selectionnant "guide" dans le header.
 
