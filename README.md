@@ -2,7 +2,7 @@
 
 - Le code source, backend et frontend.
 - Le pdf du Jalon T2 pour suivre l'avancement du projet.
-- une petite vidéo explicative pour comprendre comment utiliser Auditable .
+- Pour comprendre comment utiliser Auditable, il suffit de l'installer, car il guide l'utilisateur de lui-même grâce à driver.js.
 
 # Auditable
 
@@ -30,7 +30,7 @@ Le frontend a été conçu en React JS, il vous faudra donc installer node et np
 
 # Installation du projet Auditable
 
-Placez-vous dans le répertoire "frontend" du projet Auditable et lancez le script d'installation "shell_frontend_install.sh" avec la commande suivante :
+Placez-vous dans le répertoire "opentools-auditable", la racine du projet Auditable et lancez le script d'installation "shell_frontend_install.sh" avec la commande suivante :
 
 sudo ./shell_frontend_install.sh
 
