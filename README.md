@@ -1,7 +1,6 @@
 # Contenu actuel du github :
 
 - Le code source, backend et frontend.
-- Le pdf du Jalon T2 pour suivre l'avancement du projet.
 - Pour comprendre comment utiliser Auditable, il suffit de l'installer, car il guide l'utilisateur de lui-même grâce à driver.js.
 
 # Auditable
