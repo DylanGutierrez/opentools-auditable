@@ -19,45 +19,8 @@ Modifiez également la valeur "user_name" dans le ".env" et mettez votre propre 
 
 ## Structure
 
-backend/
+<img width="237" height="496" alt="image" src="https://github.com/user-attachments/assets/ee7c5fbe-d5aa-4b4e-9810-1a942d391e99" />
 
-|── app.py
 
-|── config.py
-
-|── database.py
-
-|── services/
-
-|   |── system.py
-
-|   |── reports.py
-
-|   |── settings_service.py
-
-|   |── security_feeds.py
-
-|   |── scan_helpers.py
-
-|── routes/
-
-    |── config_routes.py
-    
-    |── client_routes.py
-    
-    |── convention_routes.py
-    
-    |── scope_routes.py
-    
-    |── settings_routes.py
-    
-    |── logs_routes.py
-    
-    |── audit_routes.py
-    
-    |── scan_routes.py
-
-|---|
-    |
 
 ### Rappel : Garder un niveau de commentaire potable pour s'y retrouver sans trop de difficulté
