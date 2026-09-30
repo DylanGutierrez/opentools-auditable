@@ -16,7 +16,7 @@ Corrections appliquées :
 
 ## Installation
 
-cd /home/dylan/Documents/opentools-auditable
+cd /home/user/Documents/opentools-auditable
 sudo make install
 
 ## Lancement sans réinstallation
