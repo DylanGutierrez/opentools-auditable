@@ -12,7 +12,7 @@ export default function Logs() {
   const [data, setData] = useState(null);
   const [toolFilter, setToolFilter] = useState('all');
 
-  // Récupération des logs
+  // Récupération des logs.
   useEffect(() => {
     axios.get(`${API_URL}/logs/${auditId}`)
       .then((res) => setData(res.data))

@@ -1,4 +1,4 @@
-// Construction des étapes du guide selon la page courante
+// Construction des étapes du guide selon la page courante.
 
 function getGuidePageKey(pathname) {
   if (pathname === '/' || pathname === '/home') return 'home';

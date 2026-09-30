@@ -52,7 +52,6 @@ CREATE TABLE IF NOT EXISTS list_ip (
 );
 
 ALTER TABLE list_ip ADD COLUMN IF NOT EXISTS true_cmd_port TEXT;
-
 CREATE TABLE IF NOT EXISTS list_port (
     id INT AUTO_INCREMENT PRIMARY KEY,
     port_number INT,
@@ -72,12 +71,19 @@ CREATE TABLE IF NOT EXISTS vulnerabilities (
     EPSS_percentile FLOAT,
     CWE VARCHAR(255),
     remediation TEXT,
+    traducted_description LONGTEXT DEFAULT NULL,
+    traducted_language VARCHAR(32) DEFAULT NULL,
+    traducted_at DATETIME DEFAULT NULL,
     source VARCHAR(255),
     external_link TEXT,
     ip_id INT,
     port_id INT,
     used_tool VARCHAR(100)
 );
+
+ALTER TABLE vulnerabilities ADD COLUMN IF NOT EXISTS traducted_description LONGTEXT DEFAULT NULL;
+ALTER TABLE vulnerabilities ADD COLUMN IF NOT EXISTS traducted_language VARCHAR(32) DEFAULT NULL;
+ALTER TABLE vulnerabilities ADD COLUMN IF NOT EXISTS traducted_at DATETIME DEFAULT NULL;
 
 CREATE TABLE IF NOT EXISTS misconfiguration (
     id INT AUTO_INCREMENT PRIMARY KEY,

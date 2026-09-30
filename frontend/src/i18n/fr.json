@@ -141,7 +141,7 @@
     "Quand la convention d'audit est signée numériquement, il devient impossible de modifier le périmètre d'audit, les IPs, les ports, les outils et les paramètres. Vérifiez bien avec votre client avant toute validation.",
     "À présent, vous pouvez retourner sur la page Client, appuyer sur Gérer les analyses et lancer l'analyse via le bouton en bas de page. Selon l'importance du périmètre, l'analyse prendra plus ou moins de temps.",
     "Une fois l'analyse finie, retournez à nouveau sur l'onglet Client. Vous y trouverez un nouveau bouton Voir l'audit pour visualiser les résultats. Les résultats sont actuellement affichés en anglais.",
-    "Si vous avez utilisé la commande make install_with_translategemma lors de l'installation de l'outil, vous aurez la possibilité d'aller dans l'onglet Traduction pour traduire automatiquement les retours.",
+    "Si vous avez utilisé la commande make install lors de l'installation de l'outil, vous aurez la possibilité d'aller dans le bloc de traduction dans les Paramètres pour traduire automatiquement les retours.",
     "Si vous avez besoin de traduire d'autres éléments et si le modèle d'IA a été installé, vous aurez accès à la page Traducteur depuis la barre de navigation.",
     "Dans l'onglet Paramètres, vous pourrez ajuster les options des outils tant que la convention n'est pas signée."
   ],
@@ -291,5 +291,18 @@
   "guideAuditExportsTitle": "Exports du rapport",
   "guideAuditExportsDescription": "Exportez le rapport d'audit en HTML ou en PDF avec une mise en forme adaptée à la lecture et au partage.",
   "guideDefaultPageTitle": "Page courante",
-  "guideDefaultPageDescription": "Cette zone contient les éléments principaux de la page courante."
+  "guideDefaultPageDescription": "Cette zone contient les éléments principaux de la page courante.",
+  "translationTitle": "Traduction locale des descriptions",
+  "translationLanguage": "Langue de traduction",
+  "translationModel": "Modèle utilisé",
+  "translationStatusLoading": "Vérification de TranslateGemma...",
+  "translationStatusUnavailable": "Impossible de vérifier TranslateGemma.",
+  "translateRemediations": "Traduire les remédiations",
+  "translationRunning": "Traduction en cours...",
+  "toastTranslationDone": "Traduction terminée : {{translated}} traduite(s), {{skipped}} déjà prête(s).",
+  "toastTranslationError": "Erreur pendant la traduction.",
+  "logTranslationError": "Erreur traduction TranslateGemma :",
+  "logTranslationStatusError": "Erreur statut TranslateGemma :",
+  "translatedDescription": "Traduction",
+  "translatedDescriptionWithLanguage": "Traduction en {{language}}"
 }

@@ -10,7 +10,7 @@ export default function GuideButton() {
   const { t } = useTranslation();
   const location = useLocation();
 
-  // Lancement du guide de la page courante, utilisation du thème de base.
+  // Lancement du guide de la page courante.
   const startGuide = () => {
     const steps = buildGuideSteps(t, location.pathname);
 

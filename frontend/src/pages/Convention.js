@@ -136,7 +136,7 @@ export default function Convention() {
       });
   };
 
-  // Export PDF de la convention
+  // Export PDF de la convention.
   const exportPdf = () => {
     const source = document.getElementById(`convention-document-${auditId}`);
 

@@ -1,9 +1,9 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import fr from './i18n/fr.json';
+import en from './i18n/en.json';
 
-import fr from './locales/fr.json';
-import en from './locales/en.json';
-
+// Chargement simple des traductions de l'interface.
 i18n
   .use(initReactI18next)
   .init({

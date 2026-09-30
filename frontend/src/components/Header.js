@@ -10,7 +10,7 @@ export default function Header() {
   const [username, setUsername] = useState("");
   const { t, i18n } = useTranslation();
 
-  // Récupération de l'utilisateur connecté
+  // Récupération de l'utilisateur connecté.
   useEffect(() => {
     axios.get(`${API_URL}/config`)
       .then((res) => setUsername(res.data.username || ""))

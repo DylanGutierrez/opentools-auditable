@@ -13,7 +13,7 @@ export default function AuditReport() {
   const [remediationDrafts, setRemediationDrafts] = useState({});
   const [savingRemediationId, setSavingRemediationId] = useState(null);
 
-  // Récupération des vulnérabilités
+  // Récupération des vulnérabilités.
   useEffect(() => {
     axios.get(`${API_URL}/audit/${auditId}/report`)
       .then((res) => {
@@ -44,6 +44,15 @@ export default function AuditReport() {
     }
 
     return `${numericValue.toFixed(2)} %`;
+  };
+
+  const getTranslatedDescriptionLabel = (vuln) => {
+    if (!vuln.traducted_description) {
+      return '';
+    }
+    return vuln.traducted_language
+      ? t('translatedDescriptionWithLanguage', { language: vuln.traducted_language })
+      : t('translatedDescription');
   };
 
   const getSeverityClassName = (value) => {
@@ -103,6 +112,9 @@ export default function AuditReport() {
       ? vulnerabilities.map((vuln, index) => {
           const remediation = remediationDrafts[vuln.id] || vuln.remediation || t('noRemediation');
           const severityClass = getSeverityClassName(vuln.criticity);
+          const translatedDescription = vuln.traducted_description
+            ? `<div class="translated-export"><strong>${escapeHtml(getTranslatedDescriptionLabel(vuln))}</strong><br />${escapeHtml(vuln.traducted_description)}</div>`
+            : '';
 
           return `
             <article class="vulnerability-card">
@@ -124,7 +136,7 @@ export default function AuditReport() {
                   <tbody>
                     <tr>
                       <th>${escapeHtml(t('description'))}</th>
-                      <td>${escapeHtml(vuln.description || t('noDescription'))}</td>
+                      <td>${escapeHtml(vuln.description || t('noDescription'))}${translatedDescription}</td>
                     </tr>
                     <tr>
                       <th>${escapeHtml(t('remediation'))}</th>
@@ -396,6 +408,13 @@ export default function AuditReport() {
       font-size: 0.9rem;
     }
 
+    .translated-export {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      color: #334155;
+    }
+
     .empty-state {
       text-align: center;
       padding: 26px;
@@ -642,7 +661,17 @@ export default function AuditReport() {
                     <tr>
                       <td>{vuln.CVE || t('notAvailable')}</td>
                       <td>{vuln.criticity ?? t('notAvailable')}</td>
-                      <td>{vuln.description || t('noDescription')}</td>
+                      <td>
+                        <p className="audit-description-text">
+                          {vuln.description || t('noDescription')}
+                        </p>
+                        {vuln.traducted_description && (
+                          <div className="translated-description-box">
+                            <strong>{getTranslatedDescriptionLabel(vuln)}</strong>
+                            <p>{vuln.traducted_description}</p>
+                          </div>
+                        )}
+                      </td>
                       <td>{remediationDrafts[vuln.id] || vuln.remediation || t('noRemediation')}</td>
                       <td>
                         <div className="epss-cell">

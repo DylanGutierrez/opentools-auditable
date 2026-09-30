@@ -9,7 +9,7 @@ export default function ClientForm({ initialData, submitLabel, onSubmit }) {
     setFormData(initialData);
   }, [initialData]);
 
-  // Gestion simple de la saisie du client
+  // Gestion simple de la saisie du client.
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));

@@ -33,7 +33,7 @@ export default function EditClient() {
       });
   }, [navigate, t]);
 
-  // Modification du client
+  // Modification du client.
   const handleSubmit = (formData) => {
     axios.put(`${API_URL}/client`, formData)
       .then((res) => {

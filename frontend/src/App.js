@@ -4,7 +4,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
-// Dispersion du code et passage à l'infra clean code le 07/05/2026
 import Header from './components/Header';
 import Home from './pages/Home';
 import Client from './pages/Client';
@@ -22,9 +21,7 @@ export default function App() {
       <div className="app-shell">
         <Header />
 
-        {/* Routage vers les différentes pages du projet */}
-        {/* Voir plus tard améliorer l'infra clean code si possible */}
-        {/* Voir plus tard pour la mise en place de nested routes */}
+        {/* Routage vers les différentes pages du projet. */}
         <div className="page-container">
           <Routes>
             <Route path="/" element={<Home />} />

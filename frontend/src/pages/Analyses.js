@@ -17,7 +17,7 @@ export default function Analyses() {
   const [ip, setIp] = useState('');
   const [ports, setPorts] = useState('');
 
-  // Choix des outils de scan
+  // Choix des outils de scan.
   const [tools, setTools] = useState(() => {
     try {
       const savedTools = localStorage.getItem(`audit-tools-${auditId}`);
@@ -27,7 +27,7 @@ export default function Analyses() {
     }
   });
 
-  // Récupération du périmètre IP / Ports
+  // Récupération du périmètre IP / Ports.
   const loadScope = () => {
     axios.get(`${API_URL}/scope/${auditId}`)
       .then((res) => {
@@ -57,7 +57,7 @@ export default function Analyses() {
     setPorts('');
   };
 
-  // Limitation de la saisie des IP / Port pour éviter les erreurs
+  // Limitation de la saisie des IP / Port pour éviter les erreurs.
   const handleValidate = () => {
     if (!ip.trim()) {
       toast.warning(t('toastIpRequired'));
@@ -113,7 +113,7 @@ export default function Analyses() {
       });
   };
 
-  // Lancement de l'analyse
+  // Lancement de l'analyse.
   const handleScan = () => {
     const selectedTools = Object.keys(tools).filter((tool) => tools[tool]);
 

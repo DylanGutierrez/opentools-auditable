@@ -1140,3 +1140,58 @@ select:focus {
   border-color: #cbd5e1 !important;
   text-shadow: none !important;
 }
+
+/* Bloc TranslateGemma dans les paramètres. */
+.translation-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  gap: 18px;
+  margin: 26px 0;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.translation-panel h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+}
+
+.translation-actions {
+  display: grid;
+  grid-template-columns: minmax(180px, 220px) auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.translation-actions .form-label {
+  grid-column: 1 / -1;
+}
+
+.audit-description-text {
+  margin: 0;
+}
+
+.translated-description-box {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-left: 4px solid var(--primary);
+  border-radius: 12px;
+  background: #eff6ff;
+}
+
+.translated-description-box p {
+  margin: 8px 0 0;
+  color: #334155;
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .translation-actions {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+}

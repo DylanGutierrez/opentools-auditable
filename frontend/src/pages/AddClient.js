@@ -10,7 +10,7 @@ export default function AddClient() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  // Vérification qu'un client n'existe pas déjà
+  // Vérification qu'un client n'existe pas déjà.
   useEffect(() => {
     axios.get(`${API_URL}/client`)
       .then((res) => {
@@ -24,7 +24,7 @@ export default function AddClient() {
       });
   }, [navigate, t]);
 
-  // Création du client
+  // Création du client.
   const handleSubmit = (formData) => {
     axios.post(`${API_URL}/client`, formData)
       .then(() => {

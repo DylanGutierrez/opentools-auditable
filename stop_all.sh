@@ -60,6 +60,12 @@ for PORT in 5000 5173 3000; do
   fi
 done
 
+
+echo "[+] Arrêt du modèle TranslateGemma si chargé..."
+if command -v ollama >/dev/null 2>&1; then
+  ollama stop translategemma:4b 2>/dev/null || true
+fi
+
 echo "[+] Arrêt de la base de données MariaDB/MySQL..."
 
 if command -v systemctl >/dev/null 2>&1; then

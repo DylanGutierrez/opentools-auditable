@@ -12,7 +12,7 @@ export default function Client() {
   const [hasAuditResults, setHasAuditResults] = useState(false);
   const navigate = useNavigate();
 
-  // Récupération du client et de l'état de l'audit
+  // Récupération du client et de l'état de l'audit.
   useEffect(() => {
     axios.get(`${API_URL}/client`)
       .then((res) => {

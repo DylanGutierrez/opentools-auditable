@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import API_URL from '../config/api';
 
-// Ne pas oublier de rajouter ces valeurs dans les Json i18n.
 const OUTPUT_COMMON = ['', 'htm', 'sql', 'txt', 'json', 'xml', 'all'];
 const OUTPUT_NMAP = ['', 'xml', 'txt', 'all'];
 const NIKTO_TUNING_OPTIONS = [
@@ -25,6 +24,12 @@ const NIKTO_TUNING_OPTIONS = [
   ['d', 'WebService']
 ];
 const NUCLEI_SEVERITIES = ['info', 'low', 'medium', 'high', 'critical'];
+const TRANSLATION_LANGUAGES = [
+  ['fr', 'Français'],
+  ['en', 'Anglais'],
+  ['es', 'Espagnol'],
+  ['it', 'Italien']
+];
 
 export default function Settings() {
   const { t } = useTranslation();
@@ -32,8 +37,11 @@ export default function Settings() {
   const [loading, setLoading] = useState(true);
   const [isSigned, setIsSigned] = useState(false);
   const [settings, setSettings] = useState(null);
+  const [translateLanguage, setTranslateLanguage] = useState('fr');
+  const [translationStatus, setTranslationStatus] = useState(null);
+  const [isTranslating, setIsTranslating] = useState(false);
 
-  // Vérification des paramètres
+  // Vérification des paramètres.
   const loadSettings = () => {
     axios.get(`${API_URL}/settings/${auditId}`)
       .then((res) => {
@@ -47,11 +55,22 @@ export default function Settings() {
       .finally(() => setLoading(false));
   };
 
+  // Vérification de l'installation TranslateGemma.
+  const loadTranslationStatus = () => {
+    axios.get(`${API_URL}/translate/status`)
+      .then((res) => setTranslationStatus(res.data))
+      .catch((err) => {
+        console.error(t('logTranslationStatusError'), err);
+        setTranslationStatus({ ready: false, message: t('translationStatusUnavailable') });
+      });
+  };
+
   useEffect(() => {
     loadSettings();
+    loadTranslationStatus();
   }, [auditId, t]);
 
-  // Mise à jour des paramètres d'un outil
+  // Mise à jour des paramètres d'un outil.
   const updateTool = (tool, values) => {
     const nextSettings = {
       ...settings,
@@ -77,7 +96,7 @@ export default function Settings() {
       });
   };
 
-  // Tuning Nikto
+  // Tuning Nikto.
   const toggleTuning = (code) => {
     const current = settings.nikto.tuning_option || '';
     const hasCode = current.includes(code);
@@ -87,7 +106,7 @@ export default function Settings() {
     updateTool('nikto', { tuning_option: next });
   };
 
-  // Criticités Nuclei
+  // Criticités Nuclei.
   const toggleSeverity = (severity) => {
     const current = (settings.nuclei.severity || '').split(',').filter(Boolean);
     const hasSeverity = current.includes(severity);
@@ -101,6 +120,28 @@ export default function Settings() {
     }
 
     updateTool('nuclei', { severity: next.join(',') });
+  };
+
+  // Traduction des descriptions de vulnérabilités avec TranslateGemma.
+  const handleTranslateRemediations = () => {
+    setIsTranslating(true);
+
+    axios.post(`${API_URL}/translate/remediations`, {
+      audit_id: Number(auditId),
+      language: translateLanguage
+    })
+      .then((res) => {
+        toast.success(t('toastTranslationDone', {
+          translated: res.data.translated ?? 0,
+          skipped: res.data.skipped ?? 0
+        }));
+        loadTranslationStatus();
+      })
+      .catch((err) => {
+        console.error(t('logTranslationError'), err);
+        toast.error(err.response?.data?.error || t('toastTranslationError'));
+      })
+      .finally(() => setIsTranslating(false));
   };
 
   if (loading) return <p className="loader-text">{t('loading')}</p>;
@@ -125,6 +166,41 @@ export default function Settings() {
 
       <div className={`status-badge ${isSigned ? 'signed' : 'unsigned'}`}>
         {isSigned ? t('settingsLocked') : t('settingsEditable')}
+      </div>
+
+      <div className="translation-panel">
+        <div>
+          <h3>{t('translationTitle')}</h3>
+          <p className="muted-text">
+            {translationStatus?.message || t('translationStatusLoading')}
+          </p>
+          <p className="muted-text">
+            {t('translationModel')} : {translationStatus?.model || 'translategemma:4b'}
+          </p>
+        </div>
+
+        <div className="translation-actions">
+          <label className="form-label" htmlFor="translation-language">
+            {t('translationLanguage')}
+          </label>
+          <select
+            id="translation-language"
+            value={translateLanguage}
+            onChange={(event) => setTranslateLanguage(event.target.value)}
+          >
+            {TRANSLATION_LANGUAGES.map(([value, label]) => (
+              <option key={value} value={value}>{label}</option>
+            ))}
+          </select>
+          <button
+            type="button"
+            className="btn-primary"
+            onClick={handleTranslateRemediations}
+            disabled={isTranslating || translationStatus?.ready === false}
+          >
+            {isTranslating ? t('translationRunning') : t('translateRemediations')}
+          </button>
+        </div>
       </div>
 
       <div className="settings-grid">

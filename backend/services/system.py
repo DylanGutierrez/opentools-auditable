@@ -151,6 +151,27 @@ def ensure_runtime_schema():
         except Error as e:
             print(f"[!] Migration ignorée pour list_ip.true_cmd_port : {e}")
 
+        # Colonnes utilisées par TranslateGemma pour stocker la traduction locale.
+        translation_columns = {
+            "traducted_description": "LONGTEXT DEFAULT NULL",
+            "traducted_language": "VARCHAR(32) DEFAULT NULL",
+            "traducted_at": "DATETIME DEFAULT NULL",
+        }
+        for column_name, column_type in translation_columns.items():
+            try:
+                cursor.execute("""
+                    SELECT COUNT(*)
+                    FROM INFORMATION_SCHEMA.COLUMNS
+                    WHERE TABLE_SCHEMA = DATABASE()
+                      AND TABLE_NAME = 'vulnerabilities'
+                      AND COLUMN_NAME = %s
+                """, (column_name,))
+                exists = cursor.fetchone()[0]
+                if not exists:
+                    cursor.execute(f"ALTER TABLE vulnerabilities ADD COLUMN {column_name} {column_type}")
+            except Error as e:
+                print(f"[!] Migration ignorée pour vulnerabilities.{column_name} : {e}")
+
         conn.commit()
         print("[*] Vérification/migration runtime de la base terminée.")
 

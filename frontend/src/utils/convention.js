@@ -1,4 +1,4 @@
-// Paramètres utilisés pour construire la convention et son export PDF
+// Paramètres utilisés pour construire la convention et son export PDF.
 
 export const DEFAULT_AUDIT_TOOLS = { nmap: true, wpscan: false, nikto: false, nuclei: false };
 export const TOOL_TRANSLATION_KEYS = {

@@ -141,7 +141,7 @@
     "When the audit agreement is digitally signed, the audit scope, IPs, ports, tools, and settings can no longer be modified. Check everything carefully with your client before validating.",
     "You can now return to the Client page, open Manage Analyses, and launch the analysis from the button at the bottom of the page. The analysis duration depends on the size of the scope.",
     "Once the analysis is complete, return to the Client tab. A View Audit button will appear so you can view the results. Results are currently displayed in English.",
-    "If you used make install_with_translategemma during installation, you can use the Translation tab to translate results automatically.",
+    "If you used make install during installation, you can use the translation block in Settings to translate results automatically.",
     "If you need to translate other content and the AI model has been installed, a Translator page will be available from the navigation bar.",
     "In the Settings tab, you can adjust tool options while the agreement has not been signed."
   ],
@@ -291,5 +291,18 @@
   "guideAuditExportsTitle": "Report exports",
   "guideAuditExportsDescription": "Export the audit report as HTML or PDF with a layout suitable for reading and sharing.",
   "guideDefaultPageTitle": "Current page",
-  "guideDefaultPageDescription": "This area contains the main elements of the current page."
+  "guideDefaultPageDescription": "This area contains the main elements of the current page.",
+  "translationTitle": "Local description translation",
+  "translationLanguage": "Translation language",
+  "translationModel": "Model used",
+  "translationStatusLoading": "Checking TranslateGemma...",
+  "translationStatusUnavailable": "Unable to check TranslateGemma.",
+  "translateRemediations": "Translate remediations",
+  "translationRunning": "Translation running...",
+  "toastTranslationDone": "Translation finished: {{translated}} translated, {{skipped}} already ready.",
+  "toastTranslationError": "Translation error.",
+  "logTranslationError": "TranslateGemma translation error:",
+  "logTranslationStatusError": "TranslateGemma status error:",
+  "translatedDescription": "Translation",
+  "translatedDescriptionWithLanguage": "Translation in {{language}}"
 }

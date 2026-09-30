@@ -1,9 +1,9 @@
-"""Point d’entrée Flask du backend Auditable"""
+"""Point d’entrée Flask du backend Auditable."""
 import os
 from flask import Flask
 from flask_cors import CORS
 from dotenv import load_dotenv
-""" Import des routes et des services """
+
 from services.system import install_dependencies, setup_database
 from services.security_feeds import validate_nvd_api_key
 from routes.config_routes import config_bp
@@ -14,21 +14,22 @@ from routes.settings_routes import settings_bp
 from routes.logs_routes import logs_bp
 from routes.audit_routes import audit_bp
 from routes.scan_routes import scan_bp
+from routes.translation_routes import translation_bp
 
 
 def create_app():
-    """Crée l’application Flask et branche toutes les routes"""
+    """Crée l’application Flask et branche toutes les routes."""
     # Chargement du .env.
     load_dotenv()
 
-    # Vérification des dépendances et de la base au démarrage
+    # Vérification des dépendances et de la base au démarrage.
     install_dependencies()
     setup_database()
 
     app = Flask(__name__)
     CORS(app)
 
-    # Vérification de la clé NVD au démarrage
+    # Vérification de la clé NVD au démarrage.
     if os.getenv("NVD_VERIFY_ON_START", "1").strip().lower() in ["1", "true", "yes", "oui", "on"]:
         validate_nvd_api_key(force=True)
 
@@ -41,6 +42,7 @@ def create_app():
     app.register_blueprint(logs_bp)
     app.register_blueprint(audit_bp)
     app.register_blueprint(scan_bp)
+    app.register_blueprint(translation_bp)
 
     return app
 

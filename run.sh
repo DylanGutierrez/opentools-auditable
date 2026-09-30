@@ -26,6 +26,46 @@ start_database() {
   fi
 }
 
+start_ollama() {
+  if ! command_exists ollama; then
+    return
+  fi
+
+  info "Démarrage Ollama pour TranslateGemma..."
+
+  local models_dir="${OLLAMA_MODELS_DIR:-/var/lib/auditable/ollama-models}"
+  if [ ! -d "$models_dir" ] && [ -d "$PROJECT_DIR/ollama-models" ]; then
+    models_dir="$PROJECT_DIR/ollama-models"
+  fi
+
+  if command_exists systemctl; then
+    sudo systemctl start ollama 2>/dev/null || true
+  fi
+
+  for i in $(seq 1 15); do
+    if curl -fsS http://127.0.0.1:11434/api/tags >/dev/null 2>&1; then
+      info "Ollama est prêt."
+      return
+    fi
+    sleep 1
+  done
+
+  warn "Ollama ne répond pas via systemd. Tentative fallback local..."
+  OLLAMA_MODELS="$models_dir" OLLAMA_HOST="127.0.0.1:11434" \
+    nohup ollama serve >/tmp/auditable-ollama.log 2>&1 &
+
+  for i in $(seq 1 20); do
+    if curl -fsS http://127.0.0.1:11434/api/tags >/dev/null 2>&1; then
+      info "Ollama est prêt avec le fallback local."
+      return
+    fi
+    sleep 1
+  done
+
+  warn "Ollama n'a pas démarré. La traduction sera indisponible tant que l'API locale ne répond pas."
+  tail -n 40 /tmp/auditable-ollama.log 2>/dev/null || true
+}
+
 kill_stale_pid() {
   local pid_file="$1"
   local label="$2"
@@ -53,12 +93,22 @@ start_backend() {
   fi
 
   local python_bin="$BACKEND_DIR/venv/bin/python"
+
   if [ ! -x "$python_bin" ]; then
-    python_bin="$(command -v python3 || true)"
+    info "Venv backend absent. Création rapide du venv..."
+    (
+      cd "$BACKEND_DIR"
+      python3 -m venv venv
+      "$BACKEND_DIR/venv/bin/python" -m ensurepip --upgrade >/dev/null 2>&1 || true
+      "$BACKEND_DIR/venv/bin/python" -m pip install --upgrade pip setuptools wheel
+      if [ -f requirements.txt ]; then
+        "$BACKEND_DIR/venv/bin/python" -m pip install -r requirements.txt
+      fi
+    )
   fi
 
-  if [ -z "$python_bin" ]; then
-    warn "python3 introuvable."
+  if [ ! -x "$python_bin" ]; then
+    warn "Venv Python backend introuvable ou invalide. Relance make install."
     exit 1
   fi
 
@@ -98,9 +148,9 @@ start_frontend() {
     exit 1
   fi
 
-  info "Vérification dépendance frontend driver.js..."
-  if [ ! -d "$FRONTEND_DIR/node_modules/driver.js" ]; then
-    (cd "$FRONTEND_DIR" && npm install driver.js)
+  info "Vérification des dépendances frontend..."
+  if [ ! -d "$FRONTEND_DIR/node_modules" ] || [ ! -d "$FRONTEND_DIR/node_modules/driver.js" ]; then
+    (cd "$FRONTEND_DIR" && npm install --legacy-peer-deps)
   fi
 
   info "Lancement frontend..."
@@ -129,6 +179,7 @@ start_frontend() {
 
 cd "$PROJECT_DIR"
 start_database
+start_ollama
 start_backend
 start_frontend
 
